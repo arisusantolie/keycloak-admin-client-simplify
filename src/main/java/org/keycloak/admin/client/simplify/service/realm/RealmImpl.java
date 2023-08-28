@@ -139,11 +139,46 @@ public class RealmImpl implements Realm {
     }
 
     @Override
-    public void setSmtpServer(RealmResource realmResource, EmailRepresentation emailRepresentation) {
+    public void setSmtpServer(@NotNull RealmResource realmResource,@NotNull  EmailRepresentation emailRepresentation) {
         RealmRepresentation realmRepresentation=realmResource.toRepresentation();
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, String> smtpServer = objectMapper.convertValue(emailRepresentation, new TypeReference<Map<String, String>>() {});
         realmRepresentation.setSmtpServer(smtpServer);
+        updateRealm(realmRepresentation);
+    }
+
+    @Override
+    public void setLoginTheme(@NotNull RealmResource realmResource,@NotNull String themeName) {
+        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
+        realmRepresentation.setLoginTheme(themeName);
+        updateRealm(realmRepresentation);
+    }
+
+    @Override
+    public void setAccountTheme(@NotNull RealmResource realmResource,@NotNull  String themeName) {
+        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
+        realmRepresentation.setAccountTheme(themeName);
+        updateRealm(realmRepresentation);
+    }
+
+    @Override
+    public void setAdminConsoleTheme(@NotNull RealmResource realmResource,@NotNull  String themeName) {
+        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
+        realmRepresentation.setAdminTheme(themeName);
+        updateRealm(realmRepresentation);
+    }
+
+    @Override
+    public void setEmailTheme(@NotNull RealmResource realmResource,@NotNull  String themeName) {
+        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
+        realmRepresentation.setEmailTheme(themeName);
+        updateRealm(realmRepresentation);
+    }
+
+    @Override
+    public void setInternationalizationEnabled(@NotNull RealmResource realmResource,@NotNull  Boolean isEnabled) {
+        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
+        realmRepresentation.setInternationalizationEnabled(isEnabled);
         updateRealm(realmRepresentation);
     }
 }

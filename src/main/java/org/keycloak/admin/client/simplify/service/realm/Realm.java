@@ -37,6 +37,13 @@ public interface Realm {
 
     void setSmtpServer(RealmResource realmResource, EmailRepresentation emailRepresentation);
 
+    void setLoginTheme(RealmResource realmResource,String themeName);
+    void setAccountTheme(RealmResource realmResource,String themeName);
+    void setAdminConsoleTheme(RealmResource realmResource,String themeName);
+    void setEmailTheme(RealmResource realmResource,String themeName);
+    void setInternationalizationEnabled(RealmResource realmResource,Boolean isEnabled);
+
+
 
 
 }
