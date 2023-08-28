@@ -2,6 +2,7 @@ package org.keycloak.admin.client.simplify.service.realm;
 
 import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.admin.client.resource.ServerInfoResource;
+import org.keycloak.admin.client.simplify.service.reprensetation.EmailRepresentation;
 import org.keycloak.representations.idm.RealmEventsConfigRepresentation;
 import org.keycloak.representations.idm.RealmRepresentation;
 
@@ -33,6 +34,8 @@ public interface Realm {
     void setLoginVerifyEmailAllowed(RealmResource realmResource,Boolean verifyEmail);
     void setLoginWithEmailAllowed(RealmResource realmResource,Boolean loginWithEmail);
     void setLoginSslRequired(RealmResource realmResource,String sslRequired);
+
+    void setSmtpServer(RealmResource realmResource, EmailRepresentation emailRepresentation);
 
 
 

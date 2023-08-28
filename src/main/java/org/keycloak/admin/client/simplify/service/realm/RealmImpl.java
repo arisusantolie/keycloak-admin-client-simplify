@@ -1,12 +1,16 @@
 package org.keycloak.admin.client.simplify.service.realm;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.admin.client.resource.ServerInfoResource;
+import org.keycloak.admin.client.simplify.service.reprensetation.EmailRepresentation;
 import org.keycloak.representations.idm.RealmRepresentation;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -131,6 +135,15 @@ public class RealmImpl implements Realm {
     public void setLoginSslRequired(@NotNull RealmResource realmResource,@NotNull String sslRequired) {
         RealmRepresentation realmRepresentation=realmResource.toRepresentation();
         realmRepresentation.setSslRequired(sslRequired);
+        updateRealm(realmRepresentation);
+    }
+
+    @Override
+    public void setSmtpServer(RealmResource realmResource, EmailRepresentation emailRepresentation) {
+        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, String> smtpServer = objectMapper.convertValue(emailRepresentation, new TypeReference<Map<String, String>>() {});
+        realmRepresentation.setSmtpServer(smtpServer);
         updateRealm(realmRepresentation);
     }
 }
