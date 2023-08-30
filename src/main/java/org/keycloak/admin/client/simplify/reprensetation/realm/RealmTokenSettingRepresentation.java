@@ -50,6 +50,9 @@ public class RealmTokenSettingRepresentation {
         this.actionTokenGeneratedByAdminLifespan = actionTokenGeneratedByAdminLifespan;
     }
 
+    public RealmTokenSettingRepresentation() {
+    }
+
     public String getDefaultSignatureAlgorithm() {
         return defaultSignatureAlgorithm;
     }

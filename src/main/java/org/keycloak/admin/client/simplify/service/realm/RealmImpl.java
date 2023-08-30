@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jboss.logging.Logger;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.RealmResource;
-import org.keycloak.admin.client.simplify.reprensetation.realm.EmailRepresentation;
-import org.keycloak.admin.client.simplify.reprensetation.realm.RealmLoginSettingRepresentation;
-import org.keycloak.admin.client.simplify.reprensetation.realm.RealmThemesSettingRepresentation;
-import org.keycloak.admin.client.simplify.reprensetation.realm.RealmTokenSettingRepresentation;
+import org.keycloak.admin.client.simplify.reprensetation.realm.*;
 import org.keycloak.admin.client.simplify.utils.UtilsCopyProperties;
 import org.keycloak.representations.idm.RealmRepresentation;
 import javax.validation.constraints.NotNull;
@@ -129,6 +126,13 @@ public class RealmImpl implements Realm {
     public void setRealmTokenSetting(RealmResource realmResource, RealmTokenSettingRepresentation realmTokenSettingRepresentation) {
         RealmRepresentation realmRepresentation=realmResource.toRepresentation();
         UtilsCopyProperties.copyNonNullProperties(realmTokenSettingRepresentation,realmRepresentation);
+        updateRealm(realmRepresentation);
+    }
+
+    @Override
+    public void setRealmSecurityBruteForceSetting(RealmResource realmResource, RealmSecurityBruteForceSettingRepresentation realmSecurityBruteForceSettingRepresentation) {
+        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
+        UtilsCopyProperties.copyNonNullProperties(realmSecurityBruteForceSettingRepresentation,realmRepresentation);
         updateRealm(realmRepresentation);
     }
 }
