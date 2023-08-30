@@ -5,10 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jboss.logging.Logger;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.RealmResource;
-import org.keycloak.admin.client.simplify.enums.SslRequiredEnum;
-import org.keycloak.admin.client.simplify.reprensetation.EmailRepresentation;
-import org.keycloak.admin.client.simplify.reprensetation.RealmLoginSettingRepresentation;
-import org.keycloak.admin.client.simplify.reprensetation.RealmThemesSettingRepresentation;
+import org.keycloak.admin.client.simplify.reprensetation.realm.EmailRepresentation;
+import org.keycloak.admin.client.simplify.reprensetation.realm.RealmLoginSettingRepresentation;
+import org.keycloak.admin.client.simplify.reprensetation.realm.RealmThemesSettingRepresentation;
+import org.keycloak.admin.client.simplify.reprensetation.realm.RealmTokenSettingRepresentation;
 import org.keycloak.admin.client.simplify.utils.UtilsCopyProperties;
 import org.keycloak.representations.idm.RealmRepresentation;
 import javax.validation.constraints.NotNull;
@@ -123,5 +123,12 @@ public class RealmImpl implements Realm {
     @Override
     public void clearKeysCache(RealmResource realmResource) {
         realmResource.clearRealmCache();
+    }
+
+    @Override
+    public void setRealmTokenSetting(RealmResource realmResource, RealmTokenSettingRepresentation realmTokenSettingRepresentation) {
+        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
+        UtilsCopyProperties.copyNonNullProperties(realmTokenSettingRepresentation,realmRepresentation);
+        updateRealm(realmRepresentation);
     }
 }

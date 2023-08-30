@@ -1,4 +1,4 @@
-package org.keycloak.admin.client.simplify.reprensetation;
+package org.keycloak.admin.client.simplify.reprensetation.realm;
 
 public class RealmThemesSettingRepresentation {
     private String loginTheme;

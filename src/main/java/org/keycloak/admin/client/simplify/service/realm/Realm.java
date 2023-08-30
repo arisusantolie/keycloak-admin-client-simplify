@@ -1,9 +1,10 @@
 package org.keycloak.admin.client.simplify.service.realm;
 
 import org.keycloak.admin.client.resource.RealmResource;
-import org.keycloak.admin.client.simplify.reprensetation.EmailRepresentation;
-import org.keycloak.admin.client.simplify.reprensetation.RealmLoginSettingRepresentation;
-import org.keycloak.admin.client.simplify.reprensetation.RealmThemesSettingRepresentation;
+import org.keycloak.admin.client.simplify.reprensetation.realm.EmailRepresentation;
+import org.keycloak.admin.client.simplify.reprensetation.realm.RealmLoginSettingRepresentation;
+import org.keycloak.admin.client.simplify.reprensetation.realm.RealmThemesSettingRepresentation;
+import org.keycloak.admin.client.simplify.reprensetation.realm.RealmTokenSettingRepresentation;
 import org.keycloak.representations.idm.RealmRepresentation;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public interface Realm {
 
     void clearKeysCache(RealmResource realmResource);
 
-
+    void setRealmTokenSetting(RealmResource realmResource, RealmTokenSettingRepresentation realmTokenSettingRepresentation);
 
 
 }

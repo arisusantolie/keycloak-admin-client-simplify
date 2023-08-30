@@ -1,6 +1,6 @@
-package org.keycloak.admin.client.simplify.reprensetation;
+package org.keycloak.admin.client.simplify.reprensetation.realm;
 
-import org.keycloak.admin.client.simplify.enums.SslRequiredEnum;
+import org.keycloak.admin.client.simplify.enums.realm.SslRequiredEnum;
 
 public class RealmLoginSettingRepresentation {
     private Boolean registrationAllowed;
