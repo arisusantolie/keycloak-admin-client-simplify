@@ -43,6 +43,10 @@ public interface Realm {
     void setEmailTheme(RealmResource realmResource,String themeName);
     void setInternationalizationEnabled(RealmResource realmResource,Boolean isEnabled);
 
+    void clearRealmCache(RealmResource realmResource);
+    void clearUserCache(RealmResource realmResource);
+    void clearKeysCache(RealmResource realmResource);
+
 
 
 

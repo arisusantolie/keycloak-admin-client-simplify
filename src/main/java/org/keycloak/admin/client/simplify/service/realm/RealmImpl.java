@@ -181,4 +181,19 @@ public class RealmImpl implements Realm {
         realmRepresentation.setInternationalizationEnabled(isEnabled);
         updateRealm(realmRepresentation);
     }
+
+    @Override
+    public void clearRealmCache(RealmResource realmResource) {
+        realmResource.clearRealmCache();
+    }
+
+    @Override
+    public void clearUserCache(RealmResource realmResource) {
+        realmResource.clearUserCache();
+    }
+
+    @Override
+    public void clearKeysCache(RealmResource realmResource) {
+        realmResource.clearRealmCache();
+    }
 }
