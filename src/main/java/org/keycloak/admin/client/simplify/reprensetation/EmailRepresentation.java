@@ -1,4 +1,4 @@
-package org.keycloak.admin.client.simplify.service.reprensetation;
+package org.keycloak.admin.client.simplify.reprensetation;
 
 public class EmailRepresentation {
 

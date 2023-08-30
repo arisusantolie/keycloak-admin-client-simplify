@@ -2,10 +2,14 @@ package org.keycloak.admin.client.simplify.service.realm;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jboss.logging.Logger;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.RealmResource;
-import org.keycloak.admin.client.resource.ServerInfoResource;
-import org.keycloak.admin.client.simplify.service.reprensetation.EmailRepresentation;
+import org.keycloak.admin.client.simplify.enums.SslRequiredEnum;
+import org.keycloak.admin.client.simplify.reprensetation.EmailRepresentation;
+import org.keycloak.admin.client.simplify.reprensetation.RealmLoginSettingRepresentation;
+import org.keycloak.admin.client.simplify.reprensetation.RealmThemesSettingRepresentation;
+import org.keycloak.admin.client.simplify.utils.UtilsCopyProperties;
 import org.keycloak.representations.idm.RealmRepresentation;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.NotFoundException;
@@ -16,7 +20,7 @@ import java.util.Optional;
 
 public class RealmImpl implements Realm {
 
-//    private static final Logger LOG = LoggerFactory.getLogger(RealmImpl.class);
+    private static final Logger logger = Logger.getLogger(RealmImpl.class);
 
     private final Keycloak keycloak;
 
@@ -84,57 +88,9 @@ public class RealmImpl implements Realm {
     }
 
     @Override
-    public void setLoginUserRegistrationAllowed(@NotNull RealmResource realmResource,@NotNull Boolean userRegistration) {
+    public void setRealmLoginSetting(RealmResource realmResource,@NotNull RealmLoginSettingRepresentation realmLoginSettingRepresentation) {
         RealmRepresentation realmRepresentation=realmResource.toRepresentation();
-        realmRepresentation.setRegistrationAllowed(userRegistration);
-        updateRealm(realmRepresentation);
-    }
-
-    @Override
-    public void setLoginEditUsernameAllowed(@NotNull RealmResource realmResource,@NotNull Boolean editUsername) {
-        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
-        realmRepresentation.setEditUsernameAllowed(editUsername);
-        updateRealm(realmRepresentation);
-    }
-
-    @Override
-    public void setLoginForgotPasswordAllowed(@NotNull RealmResource realmResource,@NotNull Boolean forgotPassword) {
-        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
-        realmRepresentation.setResetPasswordAllowed(forgotPassword);
-        updateRealm(realmRepresentation);
-    }
-
-    @Override
-    public void setLoginRememberMeAllowed(@NotNull RealmResource realmResource,@NotNull Boolean rememberMe) {
-        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
-        realmRepresentation.setRememberMe(rememberMe);
-        updateRealm(realmRepresentation);
-    }
-
-    @Override
-    public void setLoginVerifyEmailAllowed(@NotNull RealmResource realmResource,@NotNull Boolean verifyEmail) {
-        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
-        realmRepresentation.setVerifyEmail(verifyEmail);
-        updateRealm(realmRepresentation);
-    }
-
-    @Override
-    public void setLoginWithEmailAllowed(@NotNull RealmResource realmResource,@NotNull Boolean loginWithEmail) {
-        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
-        realmRepresentation.setLoginWithEmailAllowed(loginWithEmail);
-        updateRealm(realmRepresentation);
-    }
-
-    /*
-    sslRequired value :
-                - all (desc : all request)
-                - external (desc : external request)
-                - none (desc : none)
-     */
-    @Override
-    public void setLoginSslRequired(@NotNull RealmResource realmResource,@NotNull String sslRequired) {
-        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
-        realmRepresentation.setSslRequired(sslRequired);
+        UtilsCopyProperties.copyNonNullProperties(realmLoginSettingRepresentation,realmRepresentation);
         updateRealm(realmRepresentation);
     }
 
@@ -148,37 +104,9 @@ public class RealmImpl implements Realm {
     }
 
     @Override
-    public void setLoginTheme(@NotNull RealmResource realmResource,@NotNull String themeName) {
+    public void setRealmThemesSetting(RealmResource realmResource, RealmThemesSettingRepresentation realmThemesSettingRepresentation) {
         RealmRepresentation realmRepresentation=realmResource.toRepresentation();
-        realmRepresentation.setLoginTheme(themeName);
-        updateRealm(realmRepresentation);
-    }
-
-    @Override
-    public void setAccountTheme(@NotNull RealmResource realmResource,@NotNull  String themeName) {
-        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
-        realmRepresentation.setAccountTheme(themeName);
-        updateRealm(realmRepresentation);
-    }
-
-    @Override
-    public void setAdminConsoleTheme(@NotNull RealmResource realmResource,@NotNull  String themeName) {
-        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
-        realmRepresentation.setAdminTheme(themeName);
-        updateRealm(realmRepresentation);
-    }
-
-    @Override
-    public void setEmailTheme(@NotNull RealmResource realmResource,@NotNull  String themeName) {
-        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
-        realmRepresentation.setEmailTheme(themeName);
-        updateRealm(realmRepresentation);
-    }
-
-    @Override
-    public void setInternationalizationEnabled(@NotNull RealmResource realmResource,@NotNull  Boolean isEnabled) {
-        RealmRepresentation realmRepresentation=realmResource.toRepresentation();
-        realmRepresentation.setInternationalizationEnabled(isEnabled);
+        UtilsCopyProperties.copyNonNullProperties(realmThemesSettingRepresentation,realmRepresentation);
         updateRealm(realmRepresentation);
     }
 

@@ -1,9 +1,9 @@
 package org.keycloak.admin.client.simplify.service.realm;
 
 import org.keycloak.admin.client.resource.RealmResource;
-import org.keycloak.admin.client.resource.ServerInfoResource;
-import org.keycloak.admin.client.simplify.service.reprensetation.EmailRepresentation;
-import org.keycloak.representations.idm.RealmEventsConfigRepresentation;
+import org.keycloak.admin.client.simplify.reprensetation.EmailRepresentation;
+import org.keycloak.admin.client.simplify.reprensetation.RealmLoginSettingRepresentation;
+import org.keycloak.admin.client.simplify.reprensetation.RealmThemesSettingRepresentation;
 import org.keycloak.representations.idm.RealmRepresentation;
 
 import java.util.List;
@@ -27,24 +27,16 @@ public interface Realm {
 
     void removeRealm(RealmResource realmResource);
 
-    void setLoginUserRegistrationAllowed(RealmResource realmResource,Boolean userRegistration);
-    void setLoginEditUsernameAllowed(RealmResource realmResource,Boolean editUsername);
-    void setLoginForgotPasswordAllowed(RealmResource realmResource,Boolean forgotPassword);
-    void setLoginRememberMeAllowed(RealmResource realmResource,Boolean rememberMe);
-    void setLoginVerifyEmailAllowed(RealmResource realmResource,Boolean verifyEmail);
-    void setLoginWithEmailAllowed(RealmResource realmResource,Boolean loginWithEmail);
-    void setLoginSslRequired(RealmResource realmResource,String sslRequired);
+    void setRealmLoginSetting(RealmResource realmResource, RealmLoginSettingRepresentation realmLoginSettingRepresentation);
 
     void setSmtpServer(RealmResource realmResource, EmailRepresentation emailRepresentation);
 
-    void setLoginTheme(RealmResource realmResource,String themeName);
-    void setAccountTheme(RealmResource realmResource,String themeName);
-    void setAdminConsoleTheme(RealmResource realmResource,String themeName);
-    void setEmailTheme(RealmResource realmResource,String themeName);
-    void setInternationalizationEnabled(RealmResource realmResource,Boolean isEnabled);
+    void setRealmThemesSetting(RealmResource realmResource, RealmThemesSettingRepresentation realmThemesSettingRepresentation);
 
     void clearRealmCache(RealmResource realmResource);
+
     void clearUserCache(RealmResource realmResource);
+
     void clearKeysCache(RealmResource realmResource);
 
 
