@@ -1,10 +1,10 @@
 package org.keycloak.admin.client.simplify;
 
+import jakarta.validation.constraints.NotNull;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.simplify.service.realm.Realm;
 import org.keycloak.admin.client.simplify.service.realm.RealmImpl;
 
-import javax.validation.constraints.NotNull;
 
 public class KeycloakAdminSimplifyInitializer {
 

@@ -18,6 +18,7 @@ public class BaseContainer {
 
     static final String ADMIN_USER = "admin";
 
+
     static final String ADMIN_PW = "admin";
 
 
@@ -25,18 +26,19 @@ public class BaseContainer {
 
 
     @Container
-    public static GenericContainer<?> keycloakContainer = new GenericContainer<>("sleighzy/keycloak:16.1.0-arm64")
+    public static GenericContainer<?> keycloakContainer = new GenericContainer<>(System.getProperty("docker.image.keycloak"))
             .withExposedPorts(8080) // Expose Keycloak's HTTP port
-            .withEnv("KEYCLOAK_USER", ADMIN_USER)
-            .withEnv("KEYCLOAK_PASSWORD", ADMIN_PW)
-            .waitingFor(Wait.forHttp("/auth").forPort(8080).forStatusCode(200));
+            .withEnv("KEYCLOAK_ADMIN", ADMIN_USER)
+            .withEnv("KEYCLOAK_ADMIN_PASSWORD", ADMIN_PW)
+            .withCommand("start-dev")
+            .waitingFor(Wait.forHttp("/").forPort(8080).forStatusCode(200));
 
     @BeforeEach
     public void setUp() {
 
         String host="http://" + keycloakContainer.getHost() + ":" + keycloakContainer.getMappedPort(8080);
 
-        Keycloak keycloak= KeycloakBuilder.builder().serverUrl(host + "/auth/").realm("master").username(ADMIN_USER).password(ADMIN_PW)
+        Keycloak keycloak= KeycloakBuilder.builder().serverUrl(host + "/").realm("master").username(ADMIN_USER).password(ADMIN_PW)
                 .clientId("admin-cli")
                 .resteasyClient(((ResteasyClientBuilder) ResteasyClientBuilder.newBuilder()).connectionPoolSize(20).build()).build();
 
