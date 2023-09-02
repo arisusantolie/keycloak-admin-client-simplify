@@ -8,10 +8,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.admin.client.simplify.reprensetation.realm.EmailRepresentation;
 import org.keycloak.admin.client.simplify.reprensetation.realm.RealmLoginSettingRepresentation;
-<<<<<<< HEAD
-=======
 import org.keycloak.admin.client.simplify.reprensetation.realm.RealmSecurityBruteForceSettingRepresentation;
->>>>>>> 9e31c09 (create a some realmTest)
 import org.keycloak.admin.client.simplify.reprensetation.realm.RealmThemesSettingRepresentation;
 import org.keycloak.representations.idm.RealmRepresentation;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -183,18 +180,6 @@ public class RealmTest extends BaseContainer {
 
         Optional<RealmRepresentation> realmRepresentationAfterUpdateSmtpServerSetting=keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToRepresentation(REALM);
         assertTrue(realmRepresentationAfterUpdateSmtpServerSetting.isPresent());
-<<<<<<< HEAD
-        assertEquals("127.0.0.1",realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("host"));
-        assertEquals("22",realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("port"));
-        assertEquals("test@dummy.com",realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("from"));
-        assertEquals("test dummy",realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("fromDisplayName"));
-        assertEquals("test dummy",realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("replyToDisplayName"));
-        assertEquals("test@dummy.com",realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("replyTo"));
-        assertFalse(Boolean.parseBoolean(realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("ssl")));
-        assertFalse(Boolean.parseBoolean(realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("starttls")));
-        assertFalse(Boolean.parseBoolean(realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("auth")));
-        assertEquals("test",realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("user"));
-=======
         assertEquals(emailRepresentation.getHost(),realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("host"));
         assertEquals(emailRepresentation.getPort().toString(),realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("port"));
         assertEquals(emailRepresentation.getFrom(),realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("from"));
@@ -205,7 +190,7 @@ public class RealmTest extends BaseContainer {
         assertEquals(emailRepresentation.getStarttls(),Boolean.parseBoolean(realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("starttls")));
         assertEquals(emailRepresentation.getAuth(),Boolean.parseBoolean(realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("auth")));
         assertEquals(emailRepresentation.getUser(),realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("user"));
->>>>>>> 9e31c09 (create a some realmTest)
+
     }
 
     @Test
@@ -258,6 +243,7 @@ public class RealmTest extends BaseContainer {
         keycloakAdminSimplifyInitializer.getRealm().clearKeysCache(realmResource.get());
     }
 
+
     @Test
     @Order(15)
     public void testSetRealmTokenSetting(){
@@ -293,4 +279,5 @@ public class RealmTest extends BaseContainer {
         assertEquals(bruteForceSettingRepresentation.getMaxFailureWaitSeconds(),realmRepresentationAfterUpdateBruteForceSetting.get().getMaxFailureWaitSeconds());
         assertEquals(bruteForceSettingRepresentation.getMaxDeltaTimeSeconds(),realmRepresentationAfterUpdateBruteForceSetting.get().getMaxDeltaTimeSeconds());
     }
+
 }
