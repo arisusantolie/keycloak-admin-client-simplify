@@ -4,12 +4,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.NotFoundException;
-import org.jboss.logging.Logger;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.admin.client.simplify.reprensetation.realm.*;
 import org.keycloak.admin.client.simplify.utils.UtilsCopyProperties;
 import org.keycloak.representations.idm.RealmRepresentation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ import java.util.Optional;
 
 public class RealmImpl implements Realm {
 
-    private static final Logger logger = Logger.getLogger(RealmImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(RealmImpl.class);
 
     private final Keycloak keycloak;
 
