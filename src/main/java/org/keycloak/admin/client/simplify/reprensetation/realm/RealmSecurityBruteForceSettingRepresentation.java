@@ -5,7 +5,7 @@ public class RealmSecurityBruteForceSettingRepresentation {
     private Boolean permanentLockout; //Enable or disable Permanent Lockout
     private Integer failureFactor; //Max Login Failures
     private Integer waitIncrementSeconds; //Wait Increment (in seconds)
-    private Integer quickLoginCheckMilliSeconds; //Quick Login Check Milli Seconds (in seconds)
+    private Long quickLoginCheckMilliSeconds; //Quick Login Check Milli Seconds (in milliseconds)
     private Integer minimumQuickLoginWaitSeconds; //Minimum Quick Login Wait (in seconds)
     private Integer maxFailureWaitSeconds; //Max Wait (in seconds)
     private Integer maxDeltaTimeSeconds; //Failure Reset Time (in seconds)
@@ -13,7 +13,7 @@ public class RealmSecurityBruteForceSettingRepresentation {
     public RealmSecurityBruteForceSettingRepresentation() {
     }
 
-    public RealmSecurityBruteForceSettingRepresentation(Boolean bruteForceProtected, Boolean permanentLockout, Integer failureFactor, Integer waitIncrementSeconds, Integer quickLoginCheckMilliSeconds, Integer minimumQuickLoginWaitSeconds, Integer maxFailureWaitSeconds, Integer maxDeltaTimeSeconds) {
+    public RealmSecurityBruteForceSettingRepresentation(Boolean bruteForceProtected, Boolean permanentLockout, Integer failureFactor, Integer waitIncrementSeconds, Long quickLoginCheckMilliSeconds, Integer minimumQuickLoginWaitSeconds, Integer maxFailureWaitSeconds, Integer maxDeltaTimeSeconds) {
         this.bruteForceProtected = bruteForceProtected;
         this.permanentLockout = permanentLockout;
         this.failureFactor = failureFactor;
@@ -56,11 +56,11 @@ public class RealmSecurityBruteForceSettingRepresentation {
         this.waitIncrementSeconds = waitIncrementSeconds;
     }
 
-    public Integer getQuickLoginCheckMilliSeconds() {
+    public Long getQuickLoginCheckMilliSeconds() {
         return quickLoginCheckMilliSeconds;
     }
 
-    public void setQuickLoginCheckMilliSeconds(Integer quickLoginCheckMilliSeconds) {
+    public void setQuickLoginCheckMilliSeconds(Long quickLoginCheckMilliSeconds) {
         this.quickLoginCheckMilliSeconds = quickLoginCheckMilliSeconds;
     }
 
