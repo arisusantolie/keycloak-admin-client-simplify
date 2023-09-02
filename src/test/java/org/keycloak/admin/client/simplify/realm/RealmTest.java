@@ -6,15 +6,16 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.keycloak.admin.client.resource.RealmResource;
+import org.keycloak.admin.client.simplify.reprensetation.realm.EmailRepresentation;
 import org.keycloak.admin.client.simplify.reprensetation.realm.RealmLoginSettingRepresentation;
+import org.keycloak.admin.client.simplify.reprensetation.realm.RealmThemesSettingRepresentation;
 import org.keycloak.representations.idm.RealmRepresentation;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.testcontainers.shaded.org.hamcrest.MatcherAssert.assertThat;
 
 @Testcontainers()
@@ -153,6 +154,91 @@ public class RealmTest extends BaseContainer {
         assertTrue(realmRepresentationAfterUpdateLoginSetting.get().isLoginWithEmailAllowed());
         assertEquals(SslRequiredEnum.external.toString(), realmRepresentationAfterUpdateLoginSetting.get().getSslRequired());
 
+    }
+
+    @Test
+    @Order(10)
+    public void testSetSmtpServer(){
+        EmailRepresentation emailRepresentation=new EmailRepresentation();
+        emailRepresentation.setHost("127.0.0.1");
+        emailRepresentation.setPort(22);
+        emailRepresentation.setFrom("test@dummy.com");
+        emailRepresentation.setFromDisplayName("test dummy");
+        emailRepresentation.setReplyToDisplayName("test dummy");
+        emailRepresentation.setReplyTo("test@dummy.com");
+        emailRepresentation.setEnvelopeFrom("test@dummy.com");
+        emailRepresentation.setSsl(false);
+        emailRepresentation.setStarttls(false);
+        emailRepresentation.setAuth(false);
+        emailRepresentation.setUser("test");
+        emailRepresentation.setPassword("test");
+
+        Optional<RealmResource> realmResource=keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToOptionalResource(REALM);
+        assertTrue(realmResource.isPresent());
+        keycloakAdminSimplifyInitializer.getRealm().setSmtpServer(realmResource.get(),emailRepresentation);
+
+        Optional<RealmRepresentation> realmRepresentationAfterUpdateSmtpServerSetting=keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToRepresentation(REALM);
+        assertTrue(realmRepresentationAfterUpdateSmtpServerSetting.isPresent());
+        assertEquals("127.0.0.1",realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("host"));
+        assertEquals("22",realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("port"));
+        assertEquals("test@dummy.com",realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("from"));
+        assertEquals("test dummy",realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("fromDisplayName"));
+        assertEquals("test dummy",realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("replyToDisplayName"));
+        assertEquals("test@dummy.com",realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("replyTo"));
+        assertFalse(Boolean.parseBoolean(realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("ssl")));
+        assertFalse(Boolean.parseBoolean(realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("starttls")));
+        assertFalse(Boolean.parseBoolean(realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("auth")));
+        assertEquals("test",realmRepresentationAfterUpdateSmtpServerSetting.get().getSmtpServer().get("user"));
+    }
+
+    @Test
+    @Order(11)
+    public void testSetRealmThemesSetting(){
+        String themeName="keycloak";
+        RealmThemesSettingRepresentation realmThemesSettingRepresentation=new RealmThemesSettingRepresentation();
+        realmThemesSettingRepresentation.setLoginTheme(themeName);
+        realmThemesSettingRepresentation.setAccountTheme(themeName);
+        realmThemesSettingRepresentation.setAdminTheme(themeName);
+        realmThemesSettingRepresentation.setEmailTheme(themeName);
+        realmThemesSettingRepresentation.setInternationalizationEnabled(true);
+
+        Optional<RealmResource> realmResource=keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToOptionalResource(REALM);
+        assertTrue(realmResource.isPresent());
+        keycloakAdminSimplifyInitializer.getRealm().setRealmThemesSetting(realmResource.get(),realmThemesSettingRepresentation);
+
+        Optional<RealmRepresentation> realmRepresentationAfterUpdateThemesSetting=keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToRepresentation(REALM);
+        assertTrue(realmRepresentationAfterUpdateThemesSetting.isPresent());
+
+        assertEquals(themeName,realmRepresentationAfterUpdateThemesSetting.get().getLoginTheme());
+        assertEquals(themeName,realmRepresentationAfterUpdateThemesSetting.get().getAccountTheme());
+        assertEquals(themeName,realmRepresentationAfterUpdateThemesSetting.get().getAdminTheme());
+        assertEquals(themeName,realmRepresentationAfterUpdateThemesSetting.get().getEmailTheme());
+        assertTrue(realmRepresentationAfterUpdateThemesSetting.get().isInternationalizationEnabled());
+
+    }
+
+    @Test
+    @Order(12)
+    public void testClearRealmCache(){
+        Optional<RealmResource> realmResource=keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToOptionalResource(REALM);
+        assertTrue(realmResource.isPresent());
+        keycloakAdminSimplifyInitializer.getRealm().clearRealmCache(realmResource.get());
+    }
+
+    @Test
+    @Order(13)
+    public void testClearUserCache(){
+        Optional<RealmResource> realmResource=keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToOptionalResource(REALM);
+        assertTrue(realmResource.isPresent());
+        keycloakAdminSimplifyInitializer.getRealm().clearUserCache(realmResource.get());
+    }
+
+    @Test
+    @Order(14)
+    public void testClearKeysCache(){
+        Optional<RealmResource> realmResource=keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToOptionalResource(REALM);
+        assertTrue(realmResource.isPresent());
+        keycloakAdminSimplifyInitializer.getRealm().clearKeysCache(realmResource.get());
     }
 
 }

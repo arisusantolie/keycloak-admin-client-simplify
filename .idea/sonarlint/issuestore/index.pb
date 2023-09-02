@@ -5,8 +5,6 @@
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 R
 "keycloak-admin-client-simplify.iml,0/f/0f491061e6cefc1df5c8682ea9c7eaeda5fcf738
-é
-^src/main/java/org/keycloak/admin/client/simplify/reprensetation/realm/EmailRepresentation.java,1/f/1fb9bbf5039b39e9cba6be18005bc96c5791ff4d
 Å
 Qsrc/main/java/org/keycloak/admin/client/simplify/enums/realm/SslRequiredEnum.java,8/4/841df9058c8c8097cdcdd6143b6c5b6e2ee1f5b5
 :
