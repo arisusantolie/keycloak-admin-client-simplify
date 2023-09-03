@@ -6,10 +6,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.keycloak.admin.client.resource.RealmResource;
-import org.keycloak.admin.client.simplify.reprensetation.realm.EmailRepresentation;
-import org.keycloak.admin.client.simplify.reprensetation.realm.RealmLoginSettingRepresentation;
-import org.keycloak.admin.client.simplify.reprensetation.realm.RealmSecurityBruteForceSettingRepresentation;
-import org.keycloak.admin.client.simplify.reprensetation.realm.RealmThemesSettingRepresentation;
+import org.keycloak.admin.client.simplify.reprensetation.realm.*;
 import org.keycloak.representations.idm.RealmRepresentation;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -247,6 +244,53 @@ public class RealmTest extends BaseContainer {
     @Test
     @Order(15)
     public void testSetRealmTokenSetting(){
+        RealmTokenSettingRepresentation realmTokenSettingRepresentation=new RealmTokenSettingRepresentation();
+        realmTokenSettingRepresentation.setDefaultSignatureAlgorithm(DefaultSignatureAlgorithmEnum.ES512);
+        realmTokenSettingRepresentation.setRevokeRefreshToken(true);
+        realmTokenSettingRepresentation.setRefreshTokenMaxReuse(120);
+        realmTokenSettingRepresentation.setSsoSessionIdleTimeout(1500);
+        realmTokenSettingRepresentation.setSsoSessionMaxLifespan(300);
+        realmTokenSettingRepresentation.setSsoSessionIdleTimeoutRememberMe(300);
+        realmTokenSettingRepresentation.setSsoSessionMaxLifespanRememberMe(300);
+        realmTokenSettingRepresentation.setOfflineSessionIdleTimeout(1000);
+        realmTokenSettingRepresentation.setOfflineSessionMaxLifespanEnabled(true);
+        realmTokenSettingRepresentation.setOfflineSessionMaxLifespan(1000);
+        realmTokenSettingRepresentation.setClientOfflineSessionIdleTimeout(120);
+        realmTokenSettingRepresentation.setClientOfflineSessionMaxLifespan(120);
+        realmTokenSettingRepresentation.setClientSessionIdleTimeout(600);
+        realmTokenSettingRepresentation.setClientSessionMaxLifespan(600);
+        realmTokenSettingRepresentation.setAccessTokenLifespan(1000);
+        realmTokenSettingRepresentation.setAccessTokenLifespanForImplicitFlow(1000);
+        realmTokenSettingRepresentation.setAccessCodeLifespan(1200);
+        realmTokenSettingRepresentation.setAccessCodeLifespanLogin(1200);
+        realmTokenSettingRepresentation.setAccessCodeLifespanUserAction(1200);
+        realmTokenSettingRepresentation.setActionTokenGeneratedByUserLifespan(2600);
+        realmTokenSettingRepresentation.setActionTokenGeneratedByAdminLifespan(1200);
+
+        Optional<RealmResource> realmResource=keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToOptionalResource(REALM);
+        assertTrue(realmResource.isPresent());
+        keycloakAdminSimplifyInitializer.getRealm().setRealmTokenSetting(realmResource.get(),realmTokenSettingRepresentation);
+
+        Optional<RealmRepresentation> realmRepresentationAfterUpdateTokenSetting=keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToRepresentation(REALM);
+        assertTrue(realmRepresentationAfterUpdateTokenSetting.isPresent());
+        assertEquals(realmTokenSettingRepresentation.getDefaultSignatureAlgorithm(),realmRepresentationAfterUpdateTokenSetting.get().getDefaultSignatureAlgorithm());
+        assertEquals(realmTokenSettingRepresentation.getRevokeRefreshToken(),realmRepresentationAfterUpdateTokenSetting.get().getRevokeRefreshToken());
+        assertEquals(realmTokenSettingRepresentation.getRefreshTokenMaxReuse(),realmRepresentationAfterUpdateTokenSetting.get().getRefreshTokenMaxReuse());
+        assertEquals(realmTokenSettingRepresentation.getSsoSessionIdleTimeout(),realmRepresentationAfterUpdateTokenSetting.get().getSsoSessionIdleTimeout());
+        assertEquals(realmTokenSettingRepresentation.getSsoSessionMaxLifespan(),realmRepresentationAfterUpdateTokenSetting.get().getSsoSessionMaxLifespan());
+        assertEquals(realmTokenSettingRepresentation.getSsoSessionIdleTimeoutRememberMe(),realmRepresentationAfterUpdateTokenSetting.get().getSsoSessionIdleTimeoutRememberMe());
+        assertEquals(realmTokenSettingRepresentation.getSsoSessionMaxLifespanRememberMe(),realmRepresentationAfterUpdateTokenSetting.get().getSsoSessionMaxLifespanRememberMe());
+        assertEquals(realmTokenSettingRepresentation.getOfflineSessionIdleTimeout(),realmRepresentationAfterUpdateTokenSetting.get().getOfflineSessionIdleTimeout());
+        assertEquals(realmTokenSettingRepresentation.getClientOfflineSessionMaxLifespan(),realmRepresentationAfterUpdateTokenSetting.get().getClientOfflineSessionMaxLifespan());
+        assertEquals(realmTokenSettingRepresentation.getClientSessionIdleTimeout(),realmRepresentationAfterUpdateTokenSetting.get().getClientSessionIdleTimeout());
+        assertEquals(realmTokenSettingRepresentation.getClientSessionMaxLifespan(),realmRepresentationAfterUpdateTokenSetting.get().getClientSessionMaxLifespan());
+        assertEquals(realmTokenSettingRepresentation.getAccessTokenLifespan(),realmRepresentationAfterUpdateTokenSetting.get().getAccessTokenLifespan());
+        assertEquals(realmTokenSettingRepresentation.getAccessTokenLifespanForImplicitFlow(),realmRepresentationAfterUpdateTokenSetting.get().getAccessTokenLifespanForImplicitFlow());
+        assertEquals(realmTokenSettingRepresentation.getAccessCodeLifespan(),realmRepresentationAfterUpdateTokenSetting.get().getAccessCodeLifespan());
+        assertEquals(realmTokenSettingRepresentation.getAccessCodeLifespanLogin(),realmRepresentationAfterUpdateTokenSetting.get().getAccessCodeLifespanLogin());
+        assertEquals(realmTokenSettingRepresentation.getAccessCodeLifespanUserAction(),realmRepresentationAfterUpdateTokenSetting.get().getAccessCodeLifespanUserAction());
+        assertEquals(realmTokenSettingRepresentation.getActionTokenGeneratedByUserLifespan(),realmRepresentationAfterUpdateTokenSetting.get().getActionTokenGeneratedByUserLifespan());
+        assertEquals(realmTokenSettingRepresentation.getActionTokenGeneratedByAdminLifespan(),realmRepresentationAfterUpdateTokenSetting.get().getActionTokenGeneratedByAdminLifespan());
 
     }
 

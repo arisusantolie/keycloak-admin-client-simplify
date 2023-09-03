@@ -57,8 +57,8 @@ public class RealmTokenSettingRepresentation {
         return defaultSignatureAlgorithm;
     }
 
-    public void setDefaultSignatureAlgorithm(String defaultSignatureAlgorithm) {
-        this.defaultSignatureAlgorithm = defaultSignatureAlgorithm;
+    public void setDefaultSignatureAlgorithm(DefaultSignatureAlgorithmEnum defaultSignatureAlgorithm) {
+        this.defaultSignatureAlgorithm = defaultSignatureAlgorithm.toString();
     }
 
     public Boolean getRevokeRefreshToken() {
