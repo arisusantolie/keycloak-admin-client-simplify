@@ -1,5 +1,7 @@
 package org.keycloak.admin.client.simplify.reprensetation.realm;
 
+import org.keycloak.admin.client.simplify.enums.realm.DefaultSignatureAlgorithmEnum;
+
 public class RealmTokenSettingRepresentation {
 
     /* All value for internet in Seconds */

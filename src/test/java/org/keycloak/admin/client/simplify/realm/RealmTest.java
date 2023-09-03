@@ -1,4 +1,5 @@
 package org.keycloak.admin.client.simplify.realm;
+import org.keycloak.admin.client.simplify.enums.realm.DefaultSignatureAlgorithmEnum;
 import org.keycloak.admin.client.simplify.enums.realm.SslRequiredEnum;
 
 import org.junit.jupiter.api.MethodOrderer;

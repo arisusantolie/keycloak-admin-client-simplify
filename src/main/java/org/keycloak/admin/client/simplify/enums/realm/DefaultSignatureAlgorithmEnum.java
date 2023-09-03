@@ -1,4 +1,4 @@
-package org.keycloak.admin.client.simplify.reprensetation.realm;
+package org.keycloak.admin.client.simplify.enums.realm;
 
 public enum DefaultSignatureAlgorithmEnum {
     ES256,
