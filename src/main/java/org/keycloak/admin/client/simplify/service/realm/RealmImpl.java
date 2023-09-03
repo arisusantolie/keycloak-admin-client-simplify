@@ -87,7 +87,7 @@ public class RealmImpl implements Realm {
     }
 
     @Override
-    public void setRealmLoginSetting(RealmResource realmResource,@NotNull RealmLoginSettingRepresentation realmLoginSettingRepresentation) {
+    public void setRealmLoginSetting(@NotNull RealmResource realmResource,@NotNull RealmLoginSettingRepresentation realmLoginSettingRepresentation) {
         RealmRepresentation realmRepresentation=realmResource.toRepresentation();
         UtilsCopyProperties.copyNonNullProperties(realmLoginSettingRepresentation,realmRepresentation);
         updateRealm(realmRepresentation);
@@ -103,36 +103,36 @@ public class RealmImpl implements Realm {
     }
 
     @Override
-    public void setRealmThemesSetting(RealmResource realmResource, RealmThemesSettingRepresentation realmThemesSettingRepresentation) {
+    public void setRealmThemesSetting(@NotNull RealmResource realmResource,@NotNull RealmThemesSettingRepresentation realmThemesSettingRepresentation) {
         RealmRepresentation realmRepresentation=realmResource.toRepresentation();
         UtilsCopyProperties.copyNonNullProperties(realmThemesSettingRepresentation,realmRepresentation);
         updateRealm(realmRepresentation);
     }
 
     @Override
-    public void clearRealmCache(RealmResource realmResource) {
+    public void clearRealmCache(@NotNull RealmResource realmResource) {
         realmResource.clearRealmCache();
     }
 
     @Override
-    public void clearUserCache(RealmResource realmResource) {
+    public void clearUserCache(@NotNull RealmResource realmResource) {
         realmResource.clearUserCache();
     }
 
     @Override
-    public void clearKeysCache(RealmResource realmResource) {
+    public void clearKeysCache(@NotNull RealmResource realmResource) {
         realmResource.clearRealmCache();
     }
 
     @Override
-    public void setRealmTokenSetting(RealmResource realmResource, RealmTokenSettingRepresentation realmTokenSettingRepresentation) {
+    public void setRealmTokenSetting(@NotNull RealmResource realmResource,@NotNull RealmTokenSettingRepresentation realmTokenSettingRepresentation) {
         RealmRepresentation realmRepresentation=realmResource.toRepresentation();
         UtilsCopyProperties.copyNonNullProperties(realmTokenSettingRepresentation,realmRepresentation);
         updateRealm(realmRepresentation);
     }
 
     @Override
-    public void setRealmSecurityBruteForceSetting(RealmResource realmResource, RealmSecurityBruteForceSettingRepresentation realmSecurityBruteForceSettingRepresentation) {
+    public void setRealmSecurityBruteForceSetting(@NotNull RealmResource realmResource,@NotNull RealmSecurityBruteForceSettingRepresentation realmSecurityBruteForceSettingRepresentation) {
         RealmRepresentation realmRepresentation=realmResource.toRepresentation();
         UtilsCopyProperties.copyNonNullProperties(realmSecurityBruteForceSettingRepresentation,realmRepresentation);
         updateRealm(realmRepresentation);
