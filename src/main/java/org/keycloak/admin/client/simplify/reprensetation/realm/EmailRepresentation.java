@@ -18,6 +18,21 @@ public class EmailRepresentation {
     public EmailRepresentation() {
     }
 
+    public EmailRepresentation(String host, Integer port, String from, String fromDisplayName, String replyToDisplayName, String replyTo, String envelopeFrom, Boolean ssl, Boolean starttls, Boolean auth, String user, String password) {
+        this.host = host;
+        this.port = port;
+        this.from = from;
+        this.fromDisplayName = fromDisplayName;
+        this.replyToDisplayName = replyToDisplayName;
+        this.replyTo = replyTo;
+        this.envelopeFrom = envelopeFrom;
+        this.ssl = ssl;
+        this.starttls = starttls;
+        this.auth = auth;
+        this.user = user;
+        this.password = password;
+    }
+
     public String getHost() {
         return host;
     }

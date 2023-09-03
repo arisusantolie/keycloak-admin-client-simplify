@@ -19,13 +19,13 @@ import static org.testcontainers.shaded.org.hamcrest.MatcherAssert.assertThat;
 
 @Testcontainers()
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class RealmTest extends BaseContainer {
+class RealmTest extends BaseContainer {
 
     private static final String REALM = "realm-testing";
 
     @Test
     @Order(1)
-    public void testCreateNewRealm() {
+    void testCreateNewRealm() {
 
         //create realm first
         RealmRepresentation realmRepresentation = new RealmRepresentation();
@@ -40,13 +40,13 @@ public class RealmTest extends BaseContainer {
 
     @Test
     @Order(2)
-    public void testFindRealmByNameToResource(){
+    void testFindRealmByNameToResource(){
         assertEquals(REALM, keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToResource(REALM).toRepresentation().getRealm());
     }
 
     @Test
     @Order(3)
-    public void testFindRealmByNameToOptionalResource(){
+    void testFindRealmByNameToOptionalResource(){
         Optional<RealmResource> realmResource=keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToOptionalResource(REALM);
         assertTrue(realmResource.isPresent());
         assertEquals(REALM,realmResource.get().toRepresentation().getRealm());
@@ -54,7 +54,7 @@ public class RealmTest extends BaseContainer {
 
     @Test
     @Order(4)
-    public void testFindRealmByNameToRepresentation(){
+    void testFindRealmByNameToRepresentation(){
         Optional<RealmRepresentation> realmRepresentation=keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToRepresentation(REALM);
         assertTrue(realmRepresentation.isPresent());
         assertEquals(REALM,realmRepresentation.get().getRealm());
@@ -62,7 +62,7 @@ public class RealmTest extends BaseContainer {
 
     @Test
     @Order(5)
-    public void testFindAll(){
+    void testFindAll(){
         List<RealmRepresentation> realmRepresentations=keycloakAdminSimplifyInitializer.getRealm().findAll();
         assertTrue(!realmRepresentations.isEmpty());
 
@@ -72,7 +72,7 @@ public class RealmTest extends BaseContainer {
 
     @Test
     @Order(6)
-    public void testUpdateRealm(){
+    void testUpdateRealm(){
         Optional<RealmRepresentation> realmRepresentation=keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToRepresentation(REALM);
         assertTrue(!realmRepresentation.isEmpty());
         realmRepresentation.get().setDisplayName(REALM.concat("-display-name"));
@@ -88,7 +88,7 @@ public class RealmTest extends BaseContainer {
 
     @Test
     @Order(7)
-    public void testRemoveRealmByName(){
+    void testRemoveRealmByName(){
         //first lets create a dummy realm for testing
         RealmRepresentation realmRepresentationDummy=new RealmRepresentation();
         realmRepresentationDummy.setRealm(REALM+"-dummy");
@@ -108,7 +108,7 @@ public class RealmTest extends BaseContainer {
 
     @Test
     @Order(8)
-    public void testRemoveRealmByRealmResource(){
+    void testRemoveRealmByRealmResource(){
         //first lets create a dummy realm for testing
         RealmRepresentation realmRepresentationDummy=new RealmRepresentation();
         realmRepresentationDummy.setRealm(REALM+"-dummy");
@@ -128,7 +128,7 @@ public class RealmTest extends BaseContainer {
 
     @Test
     @Order(9)
-    public void testSetRealmLoginSetting(){
+    void testSetRealmLoginSetting(){
         RealmLoginSettingRepresentation realmLoginSettingRepresentation=new RealmLoginSettingRepresentation();
         realmLoginSettingRepresentation.setRegistrationAllowed(true);
         realmLoginSettingRepresentation.setEditUsernameAllowed(true);
@@ -157,7 +157,7 @@ public class RealmTest extends BaseContainer {
 
     @Test
     @Order(10)
-    public void testSetSmtpServer(){
+    void testSetSmtpServer(){
         EmailRepresentation emailRepresentation=new EmailRepresentation();
         emailRepresentation.setHost("127.0.0.1");
         emailRepresentation.setPort(22);
@@ -193,7 +193,7 @@ public class RealmTest extends BaseContainer {
 
     @Test
     @Order(11)
-    public void testSetRealmThemesSetting(){
+    void testSetRealmThemesSetting(){
         String themeName="keycloak";
         RealmThemesSettingRepresentation realmThemesSettingRepresentation=new RealmThemesSettingRepresentation();
         realmThemesSettingRepresentation.setLoginTheme(themeName);
@@ -219,7 +219,7 @@ public class RealmTest extends BaseContainer {
 
     @Test
     @Order(12)
-    public void testClearRealmCache(){
+    void testClearRealmCache(){
         Optional<RealmResource> realmResource=keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToOptionalResource(REALM);
         assertTrue(realmResource.isPresent());
         keycloakAdminSimplifyInitializer.getRealm().clearRealmCache(realmResource.get());
@@ -227,7 +227,7 @@ public class RealmTest extends BaseContainer {
 
     @Test
     @Order(13)
-    public void testClearUserCache(){
+    void testClearUserCache(){
         Optional<RealmResource> realmResource=keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToOptionalResource(REALM);
         assertTrue(realmResource.isPresent());
         keycloakAdminSimplifyInitializer.getRealm().clearUserCache(realmResource.get());
@@ -235,7 +235,7 @@ public class RealmTest extends BaseContainer {
 
     @Test
     @Order(14)
-    public void testClearKeysCache(){
+    void testClearKeysCache(){
         Optional<RealmResource> realmResource=keycloakAdminSimplifyInitializer.getRealm().findRealmByNameToOptionalResource(REALM);
         assertTrue(realmResource.isPresent());
         keycloakAdminSimplifyInitializer.getRealm().clearKeysCache(realmResource.get());
@@ -244,7 +244,7 @@ public class RealmTest extends BaseContainer {
 
     @Test
     @Order(15)
-    public void testSetRealmTokenSetting(){
+    void testSetRealmTokenSetting(){
         RealmTokenSettingRepresentation realmTokenSettingRepresentation=new RealmTokenSettingRepresentation();
         realmTokenSettingRepresentation.setDefaultSignatureAlgorithm(DefaultSignatureAlgorithmEnum.ES512);
         realmTokenSettingRepresentation.setRevokeRefreshToken(true);
@@ -297,7 +297,7 @@ public class RealmTest extends BaseContainer {
 
     @Test
     @Order(16)
-    public void testSetRealmSecurityBruteForceSetting(){
+    void testSetRealmSecurityBruteForceSetting(){
         RealmSecurityBruteForceSettingRepresentation bruteForceSettingRepresentation=new RealmSecurityBruteForceSettingRepresentation();
         bruteForceSettingRepresentation.setBruteForceProtected(true);
         bruteForceSettingRepresentation.setPermanentLockout(true);
